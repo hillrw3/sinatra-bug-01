@@ -1,0 +1,1 @@
+I duplicated the database.yml file to make it active, created the users table, and linked them so customers can register and log in.

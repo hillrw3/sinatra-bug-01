@@ -24,10 +24,15 @@ class App < Sinatra::Base
       INSERT INTO users (username, email, password, name_is_hunter)
       VALUES ('#{params[:username]}', '#{params[:email]}', '#{params[:password]}', '#{params[:name_is_hunter]}')
     SQL
+    if params[:name_is_hunter] == nil
+      flash[:notice] = "Please verify that your name is actually Hunter"
+      redirect back
+    else
+      @database_connection.sql(insert_sql)
+      flash[:notice] = "Thanks for signing up"
+      redirect "/"
+    end
 
-    @database_connection.sql(insert_sql)
-    flash[:notice] = "Thanks for signing up"
 
-    redirect "/"
   end
 end
